@@ -69,3 +69,8 @@ func StartQuiz(problems []Problem) (problemCount int, correctAns int) {
 
 	return len(problems), correctAnswers
 }
+
+func PrintResult(totalQuestions, correctAnswers int) {
+	fmt.Println("------------------")
+	fmt.Printf("You have answered %d quesionts correctly out of %d\n", correctAnswers, totalQuestions)
+}
