@@ -4,14 +4,10 @@ import (
 	"bufio"
 	"encoding/csv"
 	"fmt"
+	"github.com/daniial79/quiz-game/src/problem"
 	"github.com/daniial79/quiz-game/src/utils"
 	"os"
 )
-
-type Problem struct {
-	Question string
-	Answer   string
-}
 
 func ReadProblemsFile() [][]string {
 	f, err := os.Open("./src/problems.csv")
@@ -37,32 +33,32 @@ func ReadProblemsFile() [][]string {
 	return records
 }
 
-func ParseProblems(records [][]string) []Problem {
-	problems := make([]Problem, len(records))
+func ParseProblems(records [][]string) []problem.Problem {
+	problems := make([]problem.Problem, len(records))
 
 	for i := range records {
-		problems[i] = Problem{
-			Question: records[i][0],
-			Answer:   records[i][1],
-		}
+		problems[i] = problem.NewProblem(
+			records[i][0],
+			records[i][1],
+		)
 	}
 
 	return problems
 }
 
-func StartQuiz(problems []Problem) (problemCount int, correctAns int) {
+func StartQuiz(problems []problem.Problem) (problemCount int, correctAns int) {
 	var correctAnswers int
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for n, p := range problems {
 
 		var fetchedAns string
-		fmt.Printf("%d) %s ? ", n+1, p.Question)
+		fmt.Printf("%d) %s ? ", n+1, p.GetQuestion())
 		if scanner.Scan() {
 			fetchedAns = scanner.Text()
 		}
 
-		if fetchedAns == p.Answer {
+		if fetchedAns == p.GetAnswer() {
 			correctAnswers++
 		}
 	}
