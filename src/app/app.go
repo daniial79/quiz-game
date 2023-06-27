@@ -6,8 +6,10 @@ import (
 )
 
 func Start() {
-	//1 read and parse problems.csv file
+
 	records := quiz.ReadProblemsFile()
 	problems := quiz.ParseProblems(records)
-	fmt.Printf("%#v\n", problems)
+	totalQuestions, correctAnswers := quiz.StartQuiz(problems)
+	fmt.Println(totalQuestions, correctAnswers)
+
 }

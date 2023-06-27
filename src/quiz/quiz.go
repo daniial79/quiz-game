@@ -1,7 +1,9 @@
 package quiz
 
 import (
+	"bufio"
 	"encoding/csv"
+	"fmt"
 	"github.com/daniial79/quiz-game/src/utils"
 	"os"
 )
@@ -46,4 +48,24 @@ func ParseProblems(records [][]string) []Problem {
 	}
 
 	return problems
+}
+
+func StartQuiz(problems []Problem) (problemCount int, correctAns int) {
+	var correctAnswers int
+
+	scanner := bufio.NewScanner(os.Stdin)
+	for n, p := range problems {
+
+		var fetchedAns string
+		fmt.Printf("%d) %s ? ", n+1, p.Question)
+		if scanner.Scan() {
+			fetchedAns = scanner.Text()
+		}
+
+		if fetchedAns == p.Answer {
+			correctAnswers++
+		}
+	}
+
+	return len(problems), correctAnswers
 }
