@@ -5,10 +5,9 @@ import (
 )
 
 func Start() {
-
+	quiz.Welcome()
 	records := quiz.ReadProblemsFile()
 	problems := quiz.ParseProblems(records)
 	totalQuestions, correctAnswers := quiz.StartQuiz(problems)
 	quiz.PrintResult(totalQuestions, correctAnswers)
-
 }

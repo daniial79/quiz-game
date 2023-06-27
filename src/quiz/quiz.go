@@ -9,6 +9,11 @@ import (
 	"os"
 )
 
+func Welcome() {
+	fmt.Println("Welcome to this quiz program")
+	fmt.Println("------------------------")
+}
+
 func ReadProblemsFile() [][]string {
 	f, err := os.Open("./src/problems.csv")
 	if err != nil {
@@ -67,6 +72,6 @@ func StartQuiz(problems []problem.Problem) (problemCount int, correctAns int) {
 }
 
 func PrintResult(totalQuestions, correctAnswers int) {
-	fmt.Println("------------------")
+	fmt.Println("------------------------")
 	fmt.Printf("You have answered %d quesionts correctly out of %d\n", correctAnswers, totalQuestions)
 }
